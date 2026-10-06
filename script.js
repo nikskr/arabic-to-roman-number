@@ -1,5 +1,6 @@
 function convertToRomanNumerals(num) {
-  const len = Math.abs(num).toString().length;
+  // const len = Math.abs(num).toString().length;
+  const len = Math.trunc(Math.log10(num) + 1);
 
   let romanNum = "";
 
@@ -76,11 +77,16 @@ const containerEl = document.querySelector(".container");
 const inputEl = document.getElementById("input-arabic-digit");
 const sendBtn = document.getElementById("send-btn");
 
-sendBtn.addEventListener("click", () => {
+sendBtn.addEventListener("click", startCalc);
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") startCalc();
+});
+
+function startCalc() {
   const num = +inputEl.value;
   const romanNum = convertToRomanNumerals(num);
   const romanNumEl = document.createElement("h2");
   romanNumEl.textContent = romanNum;
   console.log(romanNum, romanNumEl);
   containerEl.appendChild(romanNumEl);
-});
+}
